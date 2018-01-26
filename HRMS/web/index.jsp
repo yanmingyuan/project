@@ -16,6 +16,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$6
+  TEST
   </body>
 </html>
