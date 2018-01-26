@@ -16,6 +16,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  TEST
+    <a href="toLogin">登录</a>
+    <a href="toRegisiter">注册</a>
+    <a href="">游客登录</a>
   </body>
 </html>

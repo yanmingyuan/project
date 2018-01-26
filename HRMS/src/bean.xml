@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--导入属性文件-->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <context:component-scan base-package="com.ymy"/>
+    <!--数据源bean-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.pass}"/>
+    </bean>
+    <!--session工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:com/ymy/mapper/*.xml"/>
+    </bean>
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ymy.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <!--事物管理器-->
+    <bean id="transationManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--拦截器-->
+    <tx:advice id="interceptor" transaction-manager="transationManager">
+        <tx:attributes><!--方法的通配-->
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--切面-->
+    <!--在service层拦截-->
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(* com.ymy.service.*.*(..))"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="pc"/>
+    </aop:config>
+
+    <!--实体类bean-->
+    <bean id="user" class="com.ymy.model.User"/>
+    <bean id="userDetail" class="com.ymy.model.UserDetail"/>
+    <bean id="buycar" class="com.ymy.model.Buycar"/>
+    <bean id="good" class="com.ymy.model.Good"/>
+    <bean id="orders" class="com.ymy.model.Orders"/>
+
+</beans>
