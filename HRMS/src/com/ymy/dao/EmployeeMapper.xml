@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ymy.dao.EmployeeMapper">
+    <select id="queryAll" resultType="com.ymy.model.Employee">
+        select * from T_EMP
+    </select>
+    <select id="queryObject" resultType="com.ymy.model.Employee">
+        select * from T_EMP
+        <where>
+            <if test="null!=e_name and ''!=e_name">
+                E_NAME=#{e_name}
+            </if>
+            <if test="null!=e_pass and ''!=e_pass">
+                and E_PASS=#{e_pass}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addEmployee">
+        insert into T_EMP values(S_EMP.nextval,#{e_name},#{e_pass},#{e_sex},
+        #{e_birth},#{e_email},#{e_phone},#{e_livingPlace},#{e_address},#{department.d_name},
+        #{position.p_id},#{e_salary})
+    </insert>
+
+    <delete id="deleteEmployee">
+        delete from T_EMP where E_ID=#{e_id}
+    </delete>
+
+    <update id="updateEmployee">
+        update T_EMP
+        <set>
+            <if test="null!=e_pass and ''!=e_pass">
+                E_PASS=#{e_pass},
+            </if>
+            <if test="null!=e_email and ''!=e_email">
+                E_EMAIL=#{e_email},
+            </if>
+            <if test="null!=e_livingPlace and ''!=e_livingPlace">
+                E_LIVINGPLACE=#{e_livingPlace},
+            </if>
+            <if test="null!=e_phone and ''!=e_phone">
+                E_PHONE=#{e_phone},
+            </if>
+            <if test="null!=department and ''!=department">
+                DID=#{department.d_id},
+            </if>
+            <if test="null!=positon and ''!=position">
+                PID=#{position.p_id},
+            </if>
+            <if test="0!=e_salary">
+                E_SALARY=#{e_salary}
+            </if>
+        </set>
+    </update>
+</mapper>

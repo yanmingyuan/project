@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ymy.dao.UserMapper">
+    <select id="queryObject" resultType="com.ymy.model.User">
+        select * from T_USER
+        <where>
+            <if test="null!=u_name and ''!=u_name">
+                U_NAME=#{u_name}
+            </if>
+            <if test="null!=u_pass and ''!=u_pass">
+                and U_PASS=#{u_pass}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addUser">
+        insert into T_USER VALUES (S_USER.nextval,#{u_name},#{u_pass},#{u_state})
+    </insert>
+</mapper>

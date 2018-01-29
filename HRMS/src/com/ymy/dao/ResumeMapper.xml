@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ymy.dao.ResumeMapper">
+    <select id="queryAll" resultType="com.ymy.model.Resume">
+        select * from T_RESUME
+    </select>
+
+    <select id="queryObject" resultType="com.ymy.model.Resume">
+        select * from T_RESUME where R_UID=#{user.u_id}
+    </select>
+
+    <insert id="addResume">
+        insert into T_RESUME values(S_RESUME.nextval,#{user.u_id},#{r_realName},
+        #{r_sex},#{r_birth},#{r_email},#{r_phone},#{r_livingPlace},#{r_address},
+        #{r_school},#{r_education},#{r_experience},#{r_ismarriage},#{r_certificate},
+        #{r_nation},#{r_evaluation})
+    </insert>
+
+    <delete id="deleteResume">
+        delete from T_RESUME where R_ID=#{r_id}
+    </delete>
+
+</mapper>

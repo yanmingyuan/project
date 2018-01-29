@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ymy.dao.RecruitMapper">
+    <select id="queryAll" resultType="com.ymy.model.Recruit">
+        select * from T_RECRUIT
+    </select>
+    <insert id="addRecruit">
+        insert into T_RECRUIT VALUES (S_RECRUIT.nextval,#{rc_required},
+        #{rc_position},#{rc_minsalary},#{rc_maxsalary},#{rc_number})
+    </insert>
+    <delete id="deleteRecruit">
+        DELETE FROM T_RECRUIT WHERE RC_ID=#{rc_id}
+    </delete>
+</mapper>
