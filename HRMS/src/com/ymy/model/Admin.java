@@ -1,6 +1,8 @@
 package com.ymy.model;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable{
     private int a_id;
     private String a_name;
     private String a_pass;

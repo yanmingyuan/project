@@ -29,8 +29,8 @@ public class RecruitController {
         }
         return "fail";
     }
-    @RequestMapping(value = "/queryAll")
-    public String queryAll(HttpServletRequest request){
+    @RequestMapping(value = "/queryAllRecruits")
+    public String queryAllRecruits(HttpServletRequest request){
         List<Recruit> recruits=recruitService.queryAll();
         if(null!=recruits){
             request.getSession().setAttribute("recruits",recruits);

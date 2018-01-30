@@ -6,7 +6,7 @@ public class User implements Serializable {
     private int u_id;
     private String u_name;
     private String u_pass;
-    private int u_state;
+    private int u_state;//1未投递简历，2已投递简历，3有面试，4面试成功待上班
 
     public User() {
     }

@@ -15,15 +15,16 @@ public class Resume implements Serializable {
     private String r_school;
     private String r_education;
     private String r_experience;
-    private int r_ismarriage;
+    private int r_ismarriage=2;//1已婚，2未婚
     private String r_certificate;
     private String r_nation;
     private String r_evaluation;
+    private int r_state=1;//1未投递，2已投递，3已阅读,4待面试
 
     public Resume() {
     }
 
-    public Resume(int r_id, User user, String r_realName, String r_sex, String r_birth, String r_email, String r_phone, String r_livingPlace, String r_address, String r_school, String r_education, String r_experience, int r_ismarriage, String r_certificate, String r_nation, String r_evaluation) {
+    public Resume(int r_id, User user, String r_realName, String r_sex, String r_birth, String r_email, String r_phone, String r_livingPlace, String r_address, String r_school, String r_education, String r_experience, int r_ismarriage, String r_certificate, String r_nation, String r_evaluation, int r_state) {
         this.r_id = r_id;
         this.user = user;
         this.r_realName = r_realName;
@@ -40,6 +41,7 @@ public class Resume implements Serializable {
         this.r_certificate = r_certificate;
         this.r_nation = r_nation;
         this.r_evaluation = r_evaluation;
+        this.r_state = r_state;
     }
 
     public int getR_id() {
@@ -170,6 +172,14 @@ public class Resume implements Serializable {
         this.r_evaluation = r_evaluation;
     }
 
+    public int getR_state() {
+        return r_state;
+    }
+
+    public void setR_state(int r_state) {
+        this.r_state = r_state;
+    }
+
     @Override
     public String toString() {
         return "Resume{" +
@@ -189,6 +199,7 @@ public class Resume implements Serializable {
                 ", r_certificate='" + r_certificate + '\'' +
                 ", r_nation='" + r_nation + '\'' +
                 ", r_evaluation='" + r_evaluation + '\'' +
+                ", r_state=" + r_state +
                 '}';
     }
 }

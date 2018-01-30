@@ -31,4 +31,9 @@ public class ResumeServiceImpl implements ResumeService {
     public boolean deleteResume(Resume resume) {
         return resumeMapper.deleteResume(resume);
     }
+
+    @Override
+    public boolean updateResume(Resume resume) {
+        return resumeMapper.updateResume(resume);
+    }
 }

@@ -16,6 +16,6 @@
     <title>Title</title>
 </head>
 <body>
-
+${resume}
 </body>
 </html>

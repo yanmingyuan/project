@@ -23,8 +23,8 @@ public class ResumeController {
         }
         return "addResume";
     }
-    @RequestMapping(value = "/queryAll")
-    public String queryAll(HttpServletRequest request){
+    @RequestMapping(value = "/queryAllResumes")
+    public String queryAllResumes(HttpServletRequest request){
         List<Resume> resumes=resumeService.queryAll();
         if(resumes.size()!=0||resumes!=null){
             request.getSession().setAttribute("resumes",resumes);
@@ -32,8 +32,9 @@ public class ResumeController {
         }
         return "fail";
     }
-    @RequestMapping(value = "/queryObject")
-    public String queryObject(User user,HttpServletRequest request){
+    @RequestMapping(value = "/queryResume")
+    public String queryResume(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
         Resume resume=resumeService.queryObject(user);
         if(resume!=null){
             request.getSession().setAttribute("resume",resume);
@@ -43,8 +44,9 @@ public class ResumeController {
     }
     @RequestMapping(value = "/addResume")
     public String addResume(Resume resume,HttpServletRequest request){
+        User user= (User) request.getSession().getAttribute("user");
+        resume.setUser(user);
         if(resumeService.addResume(resume)){
-            User user= (User) request.getSession().getAttribute("user");
             Resume resume1=resumeService.queryObject(user);
             request.getSession().setAttribute("resume",resume1);
            return "showRecruitToVisitor";
@@ -53,10 +55,42 @@ public class ResumeController {
     }
     @RequestMapping(value = "deleteResume")
     public String deleteResume(HttpServletRequest request){
+        User user= (User) request.getSession().getAttribute("user");
+        Resume resume=resumeService.queryObject(user);
+        if(resume!=null){
+            if(resume.getR_state()!=1){
+                return "fail";
+            }
+            if(resumeService.deleteResume(resume)){
+                return "showRecruitToVisitor";
+            }
+        }
+        return "fail";
+    }
+    @RequestMapping(value = "/toUpdateResume")
+    public String toUpdateResume(HttpServletRequest request){
         Resume resume= (Resume) request.getSession().getAttribute("resume");
-        if(resumeService.deleteResume(resume)){
+        if(resume==null){
+            return "fail";
+        }
+        if(1==resume.getR_state()) {
+            return "updateResume";
+        }
+        return "fail";
+    }
+    @RequestMapping(value = "/updateResume")
+    public String updateResume(Resume resume,HttpServletRequest request){
+        Resume resume1= (Resume) request.getSession().getAttribute("resume");
+        resume.setR_id(resume1.getR_id());
+        if(resumeService.updateResume(resume)){
             return "showRecruitToVisitor";
         }
         return "fail";
+    }
+    @RequestMapping(value="/sendResume")
+    public String sendResume(HttpServletRequest request){
+        Resume resume= (Resume) request.getSession().getAttribute("resume");
+        resume.setR_state(2);
+        return "showRecruitToVisitor";
     }
 }

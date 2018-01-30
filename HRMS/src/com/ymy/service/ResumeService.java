@@ -10,4 +10,5 @@ public interface ResumeService {
     Resume queryObject(User user);
     boolean addResume(Resume resume);
     boolean deleteResume(Resume resume);
+    boolean updateResume(Resume resume);
 }

@@ -17,17 +17,29 @@
     <title>招聘信息</title>
 </head>
 <body>
-    <a href="addResume">添加简历</a><br/>
+    <a href="toAddResume">添加简历</a><br/>
     <a href="deleteResume">删除简历</a><br/>
-    <a href="queryObject">查看简历</a><br/>
-    <a href="">投递简历</a>
+    <a href="queryResume">查看简历</a><br/>
+    <a href="toUpdateResume">修改简历</a><br/>
+    <c:if test="${resume.r_state==1}">
+        <a href="sendResume">投递简历</a>
+    </c:if>
+    <c:if test="${resume.r_state==2}">
+        <p>简历已投递</p>
+    </c:if>
+    <c:if test="${resume.r_state==3}">
+        <p>简历已被阅读</p>
+    </c:if>
+    <c:if test="${resume.r_state==4}">
+        <p>恭喜你已被邀请面试，请确认是否面试</p>
+        <a href="">确认面试</a>
+    </c:if>
     <table border="1px" cellpadding="5px" cellspacing="2px">
         <tr>
             <th>职位</th>
             <th>要求</th>
             <th>待遇</th>
             <th>人数</th>
-            <th>投递简历</th>
         </tr>
         <c:forEach items="${recruits}" var="recruit">
             <tr>
@@ -38,6 +50,5 @@
             </tr>
         </c:forEach>
     </table>
-    <a href="toManager">返回到管理界面</a>
 </body>
 </html>

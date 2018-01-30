@@ -1,23 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ymy.dao.ResumeMapper">
-    <select id="queryAll" resultType="com.ymy.model.Resume">
-        select * from T_RESUME
-    </select>
+    <mapper namespace="com.ymy.dao.ResumeMapper">
+        <select id="queryAll" resultType="com.ymy.model.Resume">
+            select * from T_RESUME
+        </select>
 
-    <select id="queryObject" resultType="com.ymy.model.Resume">
-        select * from T_RESUME where R_UID=#{user.u_id}
-    </select>
+        <select id="queryObject" parameterType="com.ymy.model.User" resultType="com.ymy.model.Resume">
+            select * from T_RESUME where R_UID=#{u_id}
+        </select>
 
-    <insert id="addResume">
-        insert into T_RESUME values(S_RESUME.nextval,#{user.u_id},#{r_realName},
-        #{r_sex},#{r_birth},#{r_email},#{r_phone},#{r_livingPlace},#{r_address},
-        #{r_school},#{r_education},#{r_experience},#{r_ismarriage},#{r_certificate},
-        #{r_nation},#{r_evaluation})
-    </insert>
+        <insert id="addResume">
+            insert into T_RESUME values(S_RESUME.nextval,#{user.u_id},#{r_realName},
+            #{r_sex},#{r_birth},#{r_email},#{r_phone},#{r_livingPlace},#{r_address},
+            #{r_school},#{r_education},#{r_experience},#{r_ismarriage},#{r_certificate},
+            #{r_nation},#{r_evaluation})
+        </insert>
 
-    <delete id="deleteResume">
-        delete from T_RESUME where R_ID=#{r_id}
-    </delete>
+        <delete id="deleteResume">
+            delete from T_RESUME where R_ID=#{r_id}
+        </delete>
 
+        <update id="updateResume">
+            update T_RESUME
+            <set>
+                <if test="null!=r_realName and ''!=r_realName">
+                    R_REALNAME=#{r_realName},
+                </if>
+                <if test="null!=r_sex and ''!=r_sex">
+                    R_SEX=#{r_sex},
+                </if>
+                <if test="null!=r_birth and ''!=r_birth">
+                    R_BIRTH=#{r_birth},
+                </if>
+                <if test="null!=r_email and ''!=r_email">
+                    R_EMAIL=#{r_email},
+                </if>
+                <if test="null!=r_phone and ''!=r_phone">
+                    R_PHONE=#{r_phone},
+                </if>
+                <if test="null!=r_livingPlace and ''!=r_livingPlace">
+                    R_LIVINGPLACE=#{r_livingPlace},
+                </if>
+                <if test="null!=r_address and ''!=r_address">
+                    R_ADDRESS=#{r_address},
+                </if>
+                <if test="null!=r_school and ''!=r_school">
+                    R_SCHOOL=#{r_school},
+                </if>
+                <if test="null!=r_education and ''!=r_education">
+                    R_EDUCATION=#{r_education},
+                </if>
+                <if test="null!=r_experience and ''!=r_experience">
+                    R_EXPERIENCE=#{r_experience},
+                </if>
+                <if test="0!=r_ismarriage">
+                    R_ISMARRIAGE=#{r_ismarriage},
+                </if>
+                <if test="r_certificate!=null and ''!=r_certificate">
+                    R_CERTIFICATE=#{r_certificate},
+                </if>
+                <if test="r_nation!=null and r_nation!=''">
+                    R_NATION=#{r_nation},
+                </if>
+                <if test="r_evaluation!=null and r_evaluation!=''">
+                    R_EVALUATION=#{r_evaluation},
+                </if>
+            </set>
+            where R_ID=#{r_id}
+        </update>
 </mapper>

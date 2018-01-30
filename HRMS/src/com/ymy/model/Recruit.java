@@ -1,6 +1,8 @@
 package com.ymy.model;
 
-public class Recruit {
+import java.io.Serializable;
+
+public class Recruit implements Serializable{
     private int rc_id;
     private String rc_required;//招聘要求如英语六级、日语三级、计算机二级等
     private String rc_position;//职位

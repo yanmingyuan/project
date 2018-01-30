@@ -4,9 +4,7 @@
     <select id="queryObject" resultType="com.ymy.model.User">
         select * from T_USER
         <where>
-            <if test="null!=u_name and ''!=u_name">
-                U_NAME=#{u_name}
-            </if>
+            U_NAME=#{u_name}
             <if test="null!=u_pass and ''!=u_pass">
                 and U_PASS=#{u_pass}
             </if>
@@ -14,6 +12,6 @@
     </select>
 
     <insert id="addUser">
-        insert into T_USER VALUES (S_USER.nextval,#{u_name},#{u_pass},#{u_state})
+        insert into T_USER values(S_USER.nextval,#{u_name},#{u_pass},#{u_state})
     </insert>
 </mapper>

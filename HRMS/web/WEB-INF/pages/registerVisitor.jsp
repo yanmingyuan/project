@@ -18,7 +18,7 @@
 <body>
     <form action="visitorRegister" method="post">
         账号：<input type="text" name="u_name" placeholder="请在此处输入账号"/><br>
-        密码：<input type="password" name="u_pass" placeholder="请在此处输入密码"/>
+        密码：<input type="password" name="u_pass" placeholder="请在此处输入密码"/><br/>
         <input type="submit" value="注册"/>
     </form>
 </body>
