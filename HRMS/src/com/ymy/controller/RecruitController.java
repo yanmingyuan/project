@@ -40,6 +40,7 @@ public class RecruitController {
     }
     @RequestMapping(value = "/deleteRecruit")
     public String deleteRecruit(@RequestParam(value = "id")int id){
+        System.out.println(id);
         Recruit recruit=new Recruit();
         recruit.setRc_id(id);
         if(recruitService.deleteRecruit(recruit)){

@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 public class AdminController {
     @Autowired
     private AdminService adminService;
-    @RequestMapping("/toRegisiter")
-    public String toRegisiter(){
+    @RequestMapping("/toAdminPage")
+    public String toAdminPage(){
+        return "adminPage";
+    }
+    @RequestMapping("/toRegister")
+    public String toRegister(){
         return "regisiter";
     }
     @RequestMapping("/toLogin")
@@ -25,7 +29,7 @@ public class AdminController {
         Admin admin1=adminService.queryObject(admin);
         if(admin1==null){
             adminService.addAdmin(admin);
-            return "success";
+            return "manager";
         }
         return "fail";
     }
@@ -34,7 +38,7 @@ public class AdminController {
         Admin admin1=adminService.queryObject(admin);
         if(admin1!=null){
             request.getSession().setAttribute("admin",admin);
-            return "success";
+            return "manager";
         }
         return "fail";
     }

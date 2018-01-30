@@ -16,8 +16,8 @@
     <title>$Title$</title>
   </head>
   <body>
-    <a href="toLogin">登录</a><br/>
-    <a href="toRegisiter">注册</a><br/>
-    <a href="">游客登录</a>
+    <a href="toAdminPage">管理员通道</a><br/>
+    <a href="">员工通道</a><br/>
+    <a href="toVisitorPage">游客通道</a>
   </body>
 </html>

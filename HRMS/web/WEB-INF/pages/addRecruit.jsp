@@ -17,10 +17,11 @@
 </head>
 <body>
     <form action="addRecruit" method="post">
-        职位：<input type="text" name="rc_position"/>
-        要求：<input type="text" name="rc_required"/>
-        待遇：<input type="text" name="rc_minsalary"/>-<input type="text" name="rc_maxsalary"/>
+        职位：<input type="text" name="rc_position"/><br/>
+        要求：<textarea name="rc_required" rows="10" cols="30">输入要求</textarea><br/>
+        待遇：<input type="text" name="rc_minsalary"/>-<input type="text" name="rc_maxsalary"/><br/>
         人数：<input type="text" name="rc_number"/>
+        <input type="submit" value="提交"/>
     </form>
 </body>
 </html>

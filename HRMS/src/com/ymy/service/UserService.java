@@ -1,8 +1,8 @@
-package com.ymy.dao;
+package com.ymy.service;
 
 import com.ymy.model.User;
 
-public interface UserMapper {
+public interface UserService {
     User queryObject(User user);
     boolean addUser(User user);
 }

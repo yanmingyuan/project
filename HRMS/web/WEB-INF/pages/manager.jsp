@@ -17,7 +17,6 @@
 </head>
 <body>
     <a href="toAddRecruit">添加招聘信息</a><hr/>
-    <%--<a href="deleteRecruit">删除招聘信息</a><hr/>--%>
     <a href="queryAll">查看所有招聘信息</a>
 </body>
 </html>

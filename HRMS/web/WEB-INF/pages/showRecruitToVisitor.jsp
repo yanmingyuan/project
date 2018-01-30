@@ -14,16 +14,20 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title>招聘信息展示页面</title>
+    <title>招聘信息</title>
 </head>
 <body>
+    <a href="addResume">添加简历</a><br/>
+    <a href="deleteResume">删除简历</a><br/>
+    <a href="queryObject">查看简历</a><br/>
+    <a href="">投递简历</a>
     <table border="1px" cellpadding="5px" cellspacing="2px">
         <tr>
-            <th>职位：</th>
-            <th>要求：</th>
-            <th>待遇：</th>
-            <th>人数：</th>
-            <th>删除：</th>
+            <th>职位</th>
+            <th>要求</th>
+            <th>待遇</th>
+            <th>人数</th>
+            <th>投递简历</th>
         </tr>
         <c:forEach items="${recruits}" var="recruit">
             <tr>
@@ -31,7 +35,6 @@
                 <td>${recruit.rc_required}</td>
                 <td>${recruit.rc_minsalary}-${recruit.rc_maxsalary}</td>
                 <td>${recruit.rc_number}</td>
-                <td><a href="deleteRecruit?id=${recruit.rc_id}">删除此条记录</a></td>
             </tr>
         </c:forEach>
     </table>
