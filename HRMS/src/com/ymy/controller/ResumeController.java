@@ -6,8 +6,10 @@ import com.ymy.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -91,6 +93,33 @@ public class ResumeController {
     public String sendResume(HttpServletRequest request){
         Resume resume= (Resume) request.getSession().getAttribute("resume");
         resume.setR_state(2);
+        resumeService.updateResume(resume);
         return "showRecruitToVisitor";
+    }
+    @RequestMapping(value = "/scanResumes")
+    public String scanResumes(HttpSession session){
+        List<Resume> resumes=resumeService.queryAll();
+        if(null==resumes) {
+            return "fail";
+        }
+        if(resumes.size()!=0){
+            session.setAttribute("resumes",resumes);
+            return "showResumesToAdmin";
+        }
+        return "fail";
+    }
+    @RequestMapping("/lookupResume")
+    public String lookupResume(@RequestParam(value = "r_id")int r_id, HttpSession session){
+        Resume resume=resumeService.queryById(r_id);
+        resume.setR_state(3);
+        resumeService.updateResume(resume);
+        session.setAttribute("resume",resume);
+        return "showResumeToAdmin";
+    }
+    @RequestMapping(value = "/toShowResumes")
+    public String toShowResumes(HttpSession session){
+        List<Resume> resumes=resumeService.queryAll();
+        session.setAttribute("resumes",resumes);
+        return "showResumesToAdmin";
     }
 }

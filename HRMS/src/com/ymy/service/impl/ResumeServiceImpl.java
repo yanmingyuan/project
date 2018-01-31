@@ -36,4 +36,9 @@ public class ResumeServiceImpl implements ResumeService {
     public boolean updateResume(Resume resume) {
         return resumeMapper.updateResume(resume);
     }
+
+    @Override
+    public Resume queryById(int r_id) {
+        return resumeMapper.queryById(r_id);
+    }
 }

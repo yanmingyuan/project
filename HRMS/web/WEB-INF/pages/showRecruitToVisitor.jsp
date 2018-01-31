@@ -31,8 +31,11 @@
         <p>简历已被阅读</p>
     </c:if>
     <c:if test="${resume.r_state==4}">
-        <p>恭喜你已被邀请面试，请确认是否面试</p>
+        <p>恭喜您已被邀请面试，请确认是否面试</p>
         <a href="">确认面试</a>
+    </c:if>
+    <c:if test="${resume.r_state==5}">
+        <p>恭喜您已成为我司正式员工</p>
     </c:if>
     <table border="1px" cellpadding="5px" cellspacing="2px">
         <tr>

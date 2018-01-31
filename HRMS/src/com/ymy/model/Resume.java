@@ -19,7 +19,7 @@ public class Resume implements Serializable {
     private String r_certificate;
     private String r_nation;
     private String r_evaluation;
-    private int r_state=1;//1未投递，2已投递，3已阅读,4待面试
+    private int r_state=1;//1未投递，2已投递，3已阅读,4待面试,5已接受邀请
 
     public Resume() {
     }
@@ -182,24 +182,21 @@ public class Resume implements Serializable {
 
     @Override
     public String toString() {
-        return "Resume{" +
-                "r_id=" + r_id +
-                ", user=" + user +
-                ", r_realName='" + r_realName + '\'' +
-                ", r_sex='" + r_sex + '\'' +
-                ", r_birth='" + r_birth + '\'' +
-                ", r_email='" + r_email + '\'' +
-                ", r_phone='" + r_phone + '\'' +
-                ", r_livingPlace='" + r_livingPlace + '\'' +
-                ", r_address='" + r_address + '\'' +
-                ", r_school='" + r_school + '\'' +
-                ", r_education='" + r_education + '\'' +
-                ", r_experience='" + r_experience + '\'' +
-                ", r_ismarriage=" + r_ismarriage +
-                ", r_certificate='" + r_certificate + '\'' +
-                ", r_nation='" + r_nation + '\'' +
-                ", r_evaluation='" + r_evaluation + '\'' +
-                ", r_state=" + r_state +
+        return "简历：{" +
+                ", 姓名：" + r_realName + '\'' +
+                ", 性别：" + r_sex + '\'' +
+                ", 出生日期：'" + r_birth + '\'' +
+                ", 电子邮箱：" + r_email + '\'' +
+                ", 手机号码：" + r_phone + '\'' +
+                ", 现居：" + r_livingPlace + '\'' +
+                ", 籍贯：" + r_address + '\'' +
+                ", 学校：" + r_school + '\'' +
+                ", 学历：" + r_education + '\'' +
+                ", 经验：" + r_experience + '\'' +
+                ", 婚配：" + r_ismarriage +
+                ", 证书" + r_certificate + '\'' +
+                ", 民族" + r_nation + '\'' +
+                ", 自我评价" + r_evaluation + '\'' +
                 '}';
     }
 }

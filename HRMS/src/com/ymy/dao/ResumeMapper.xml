@@ -2,18 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
     <mapper namespace="com.ymy.dao.ResumeMapper">
         <select id="queryAll" resultType="com.ymy.model.Resume">
-            select * from T_RESUME
+            select * from T_RESUME where R_STATE &lt;&gt; 1
         </select>
 
         <select id="queryObject" parameterType="com.ymy.model.User" resultType="com.ymy.model.Resume">
             select * from T_RESUME where R_UID=#{u_id}
         </select>
 
+        <select id="queryById" resultType="com.ymy.model.Resume">
+            select * from T_RESUME where R_ID=#{r_id}
+        </select>
+
         <insert id="addResume">
             insert into T_RESUME values(S_RESUME.nextval,#{user.u_id},#{r_realName},
             #{r_sex},#{r_birth},#{r_email},#{r_phone},#{r_livingPlace},#{r_address},
             #{r_school},#{r_education},#{r_experience},#{r_ismarriage},#{r_certificate},
-            #{r_nation},#{r_evaluation})
+            #{r_nation},#{r_evaluation},#{r_state})
         </insert>
 
         <delete id="deleteResume">
@@ -64,6 +68,9 @@
                 </if>
                 <if test="r_evaluation!=null and r_evaluation!=''">
                     R_EVALUATION=#{r_evaluation},
+                </if>
+                <if test="r_state!=0">
+                    R_STATE=#{r_state},
                 </if>
             </set>
             where R_ID=#{r_id}
