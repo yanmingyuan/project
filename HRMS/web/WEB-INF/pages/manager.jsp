@@ -17,7 +17,8 @@
 </head>
 <body>
     <a href="toAddRecruit">添加招聘信息</a><br/>
-    <a href="queryAllRecruits">查看所有招聘信息</a>
-    <a href="scanResumes">浏览所有应聘信息</a>
+    <a href="queryAllRecruits">查看所有招聘信息</a><br/>
+    <a href="scanResumes">浏览所有应聘信息</a><br/>
+
 </body>
 </html>

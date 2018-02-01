@@ -1,8 +1,10 @@
 package com.ymy.controller;
 
+import com.ymy.model.Recruit;
 import com.ymy.model.Resume;
 import com.ymy.model.User;
 import com.ymy.service.ResumeService;
+import com.ymy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import java.util.List;
 public class ResumeController {
     @Autowired
     private ResumeService resumeService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/toAddResume")
     public String toAddResume(HttpServletRequest request){
         User user= (User) request.getSession().getAttribute("user");
@@ -90,8 +94,13 @@ public class ResumeController {
         return "fail";
     }
     @RequestMapping(value="/sendResume")
-    public String sendResume(HttpServletRequest request){
+    public String sendResume(@RequestParam(value = "rc_id")int rc_id,HttpServletRequest request){
         Resume resume= (Resume) request.getSession().getAttribute("resume");
+        User user= (User) request.getSession().getAttribute("user");
+        Recruit recruit=new Recruit();
+        recruit.setRc_id(rc_id);
+        user.setRecruit(recruit);
+        userService.updateUser(user);
         resume.setR_state(2);
         resumeService.updateResume(resume);
         return "showRecruitToVisitor";

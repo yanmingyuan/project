@@ -21,8 +21,8 @@
     <a href="deleteResume">删除简历</a><br/>
     <a href="queryResume">查看简历</a><br/>
     <a href="toUpdateResume">修改简历</a><br/>
-    <c:if test="${resume.r_state==1}">
-        <a href="sendResume">投递简历</a>
+    <c:if test="${resume.r_state!=1}">
+        <a href="queryObject">查看所投的职位</a>
     </c:if>
     <c:if test="${resume.r_state==2}">
         <p>简历已投递</p>
@@ -43,6 +43,7 @@
             <th>要求</th>
             <th>待遇</th>
             <th>人数</th>
+            <th>状态</th>
         </tr>
         <c:forEach items="${recruits}" var="recruit">
             <tr>
@@ -50,6 +51,11 @@
                 <td>${recruit.rc_required}</td>
                 <td>${recruit.rc_minsalary}-${recruit.rc_maxsalary}</td>
                 <td>${recruit.rc_number}</td>
+                <td>
+                    <c:if test="${resume.r_state==1}">
+                        <a href="sendResume?rc_id=${recruit.rc_id}">投递简历</a>
+                    </c:if>
+                </td>
             </tr>
         </c:forEach>
     </table>

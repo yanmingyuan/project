@@ -7,15 +7,17 @@ public class User implements Serializable {
     private String u_name;
     private String u_pass;
     private int u_state;//1未投递简历，2已投递简历，3有面试，4面试成功待上班
+    private Recruit recruit;
 
     public User() {
     }
 
-    public User(int u_id, String u_name, String u_pass, int u_state) {
+    public User(int u_id, String u_name, String u_pass, int u_state, Recruit recruit) {
         this.u_id = u_id;
         this.u_name = u_name;
         this.u_pass = u_pass;
         this.u_state = u_state;
+        this.recruit = recruit;
     }
 
     public int getU_id() {
@@ -50,6 +52,14 @@ public class User implements Serializable {
         this.u_state = u_state;
     }
 
+    public Recruit getRecruit() {
+        return recruit;
+    }
+
+    public void setRecruit(Recruit recruit) {
+        this.recruit = recruit;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -57,6 +67,7 @@ public class User implements Serializable {
                 ", u_name='" + u_name + '\'' +
                 ", u_pass='" + u_pass + '\'' +
                 ", u_state=" + u_state +
+                ", recruit=" + recruit +
                 '}';
     }
 }

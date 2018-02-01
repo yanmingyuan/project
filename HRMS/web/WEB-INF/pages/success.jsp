@@ -17,5 +17,6 @@
 </head>
 <body>
 操作成功
+${user.recruit}
 </body>
 </html>

@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ymy.dao.UserMapper">
-    <select id="queryObject" resultType="com.ymy.model.User">
+    <select id="queryUser" resultType="com.ymy.model.User">
         select * from T_USER
         <where>
             U_NAME=#{u_name}
+            <if test="u_pass!=null and u_pass!=''">
+              AND U_PASS=#{u_pass}
+            </if>
+        </where>
+    </select>
+    <select id="queryObject" resultMap="userMap">
+        select  u.U_ID,u.U_NAME,u.U_PASS,u.U_STATE,
+        rc.RC_ID,rc.RC_REQUIRED,rc.RC_POSITION,rc.RC_MINSALARY,rc.RC_MAXSALARY,rc.RC_NUMBER
+        from T_USER u,T_RECRUIT rc
+        <where>
+             u.rc_id=rc.rc_id
+             and U_NAME=#{u_name}
             <if test="null!=u_pass and ''!=u_pass">
                 and U_PASS=#{u_pass}
             </if>
         </where>
     </select>
 
+    <resultMap id="userMap" type="com.ymy.model.User">
+        <id property="u_id" column="u_id"/>
+        <result property="u_name" column="u_name"/>
+        <result property="u_pass" column="u_pass"/>
+        <result property="u_state" column="u_state"/>
+        <association property="recruit" javaType="com.ymy.model.Recruit">
+            <id property="rc_id" column="rc_id"/>
+            <result property="rc_required" column="rc_required"/>
+            <result property="rc_position" column="rc_position"/>
+            <result property="rc_minsalary" column="rc_minsalary"/>
+            <result property="rc_maxsalary" column="rc_maxsalary"/>
+            <result property="rc_number" column="rc_number"/>
+        </association>
+    </resultMap>
     <insert id="addUser">
-        insert into T_USER values(S_USER.nextval,#{u_name},#{u_pass},#{u_state})
+        insert into T_USER(U_ID,U_NAME,U_PASS,U_STATE) values(S_USER.nextval,#{u_name},#{u_pass},#{u_state})
     </insert>
+    <update id="updateUser">
+        UPDATE T_USER
+        <set>
+            <if test="recruit!=null and recruit!=''">
+                RC_ID=#{recruit.rc_id}
+            </if>
+        </set>
+        where u_id=#{u_id}
+    </update>
 </mapper>

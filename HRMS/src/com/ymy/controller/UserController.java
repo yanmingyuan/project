@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -36,8 +37,7 @@ public class UserController {
     }
     @RequestMapping(value = "/visitorRegister")
     public String visitorRegister(User user){
-        System.out.println(user);
-        User user1=userService.queryObject(user);
+        User user1=userService.queryUser(user);
         if(user1==null){
             user.setU_state(1);
             userService.addUser(user);
@@ -47,7 +47,7 @@ public class UserController {
     }
     @RequestMapping(value = "/visitorLogin")
     public String visitorLogin(User user, HttpServletRequest request){
-        User user1=userService.queryObject(user);
+        User user1=userService.queryUser(user);
         if(user1!=null){
             request.getSession().setAttribute("user",user1);
             List<Recruit> recruits=recruitService.queryAll();
@@ -57,5 +57,12 @@ public class UserController {
             return "showRecruitToVisitor";
         }
         return "fail";
+    }
+    @RequestMapping(value = "/queryObject")
+    public String queryObject(HttpSession session){
+        User user= (User) session.getAttribute("user");
+        User user1=userService.queryObject(user);
+        session.setAttribute("user",user1);
+        return "success";
     }
 }
