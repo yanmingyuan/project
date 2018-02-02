@@ -1,11 +1,11 @@
-package com.ymy.dao;
+package com.ymy.service;
 
 import com.ymy.model.Department;
 import com.ymy.model.Position;
 
 import java.util.List;
 
-public interface PositionMapper {
+public interface PositionService {
     List<Position> queryAllDepart();
     List<Position> queryByDepart(Department department);
     boolean addPosition(Position position);

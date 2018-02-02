@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: lenovo
-  Date: 2018/1/29
-  Time: 16:17
+  Date: 2018/2/1
+  Time: 16:45
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -16,9 +16,9 @@
     <title>Title</title>
 </head>
 <body>
-    <a href="toAddRecruit">添加招聘信息</a><br/>
-    <a href="queryAllRecruits">查看所有招聘信息</a><br/>
-    <a href="scanResumes">浏览所有应聘信息</a><br/>
-    <a href="showDeparts">查看部门</a>
+    <form action="addPosition" method="post">
+        职位名称：<input type="text" name="p_name"/>
+        <input type="submit" value="保存"/>
+    </form>
 </body>
 </html>

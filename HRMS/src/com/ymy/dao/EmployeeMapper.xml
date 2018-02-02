@@ -4,22 +4,43 @@
     <select id="queryAll" resultType="com.ymy.model.Employee">
         select * from T_EMP
     </select>
-    <select id="queryObject" resultType="com.ymy.model.Employee">
+    <select id="queryObject" resultMap="empMapper">
         select * from T_EMP
         <where>
-            <if test="null!=e_name and ''!=e_name">
-                E_NAME=#{e_name}
-            </if>
+            E_NAME=#{e_name}
             <if test="null!=e_pass and ''!=e_pass">
                 and E_PASS=#{e_pass}
             </if>
         </where>
     </select>
+    <resultMap id="empMapper" type="com.ymy.model.Employee">
+        <id property="e_id" column="E_ID"/>
+        <result property="e_name" column="E_NAME"/>
+        <result property="e_pass" column="E_PASS"/>
+        <result property="e_sex" column="E_SEX"/>
+        <result property="e_birth" column="E_BIRTH"/>
+        <result property="e_email" column="E_EMAIL"/>
+        <result property="e_phone" column="E_PHONE"/>
+        <result property="e_livingPlace" column="E_LIVINGPLACE"/>
+        <result property="e_address" column="E_ADDRESS"/>
+        <result property="e_salary" column="E_SALARY"/>
+        <result property="e_state" column="E_STATE"/>
+        <association property="department" column="D_ID" javaType="com.ymy.model.Department">
+            <id property="d_id" column="D_ID"/>
+            <result property="d_name" column="D_NAME"/>
+            <result property="d_createTime" column="D_CREATETIME"/>
+        </association>
+        <association property="position" column="P_ID" javaType="com.ymy.model.Position">
+            <id property="p_id" column="P_ID"/>
+            <result property="p_name" column="P_NAME"/>
+            <result property="p_createTime" column="P_CREATETIME"/>
+        </association>
+    </resultMap>
 
     <insert id="addEmployee">
         insert into T_EMP values(S_EMP.nextval,#{e_name},#{e_pass},#{e_sex},
         #{e_birth},#{e_email},#{e_phone},#{e_livingPlace},#{e_address},#{department.d_name},
-        #{position.p_id},#{e_salary})
+        #{position.p_id},#{e_salary},#{e_state})
     </insert>
 
     <delete id="deleteEmployee">
@@ -42,14 +63,18 @@
                 E_PHONE=#{e_phone},
             </if>
             <if test="null!=department and ''!=department">
-                DID=#{department.d_id},
+                D_ID=#{department.d_id},
             </if>
             <if test="null!=positon and ''!=position">
-                PID=#{position.p_id},
+                P_ID=#{position.p_id},
             </if>
             <if test="0!=e_salary">
-                E_SALARY=#{e_salary}
+                E_SALARY=#{e_salary},
+            </if>
+            <if test="e_state!=0">
+                E_STATE=#{e_state},
             </if>
         </set>
+        where E_ID=#{e_id}
     </update>
 </mapper>

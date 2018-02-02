@@ -13,6 +13,11 @@ public class Department implements Serializable{
     public Department() {
     }
 
+    public Department(String d_name, String d_createTime) {
+        this.d_name = d_name;
+        this.d_createTime = d_createTime;
+    }
+
     public Department(int d_id, String d_name, String d_createTime, Set<Position> positionSet) {
         this.d_id = d_id;
         this.d_name = d_name;
