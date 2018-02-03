@@ -21,11 +21,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User queryObject(User user) {
-        return userMapper.queryObject(user);
-    }
-
-    @Override
     public boolean updateUser(User user) {
         return userMapper.updateUser(user);
     }

@@ -108,14 +108,8 @@ public class ResumeController {
     @RequestMapping(value = "/scanResumes")
     public String scanResumes(HttpSession session){
         List<Resume> resumes=resumeService.queryAll();
-        if(null==resumes) {
-            return "fail";
-        }
-        if(resumes.size()!=0){
-            session.setAttribute("resumes",resumes);
-            return "showResumesToAdmin";
-        }
-        return "fail";
+        session.setAttribute("resumes",resumes);
+        return "showResumesToAdmin";
     }
     @RequestMapping("/lookupResume")
     public String lookupResume(@RequestParam(value = "r_id")int r_id, HttpSession session){

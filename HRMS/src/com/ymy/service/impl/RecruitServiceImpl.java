@@ -17,6 +17,11 @@ public class RecruitServiceImpl implements RecruitService {
     }
 
     @Override
+    public Recruit queryRcById(int rc_id) {
+        return recruitMapper.queryRcById(rc_id);
+    }
+
+    @Override
     public boolean addRecruit(Recruit recruit) {
         return recruitMapper.addRecruit(recruit);
     }
@@ -24,5 +29,10 @@ public class RecruitServiceImpl implements RecruitService {
     @Override
     public boolean deleteRecruit(Recruit recruit) {
         return recruitMapper.deleteRecruit(recruit);
+    }
+
+    @Override
+    public boolean updateRecruit(Recruit recruit) {
+        return recruitMapper.updateRecruit(recruit);
     }
 }

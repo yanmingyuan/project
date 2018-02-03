@@ -32,13 +32,14 @@
     </c:if>
     <c:if test="${resume.r_state==4}">
         <p>恭喜您已被邀请面试，请确认是否面试</p>
-        <a href="">确认面试</a>
+        <a href="confirm">确认面试</a>
     </c:if>
     <c:if test="${resume.r_state==5}">
-        <p>恭喜您已成为我司正式员工</p>
+        <p>恭喜您已成为我司正式员工,请通过员工通道重新登录，账号和密码为当前账号和密码</p>
     </c:if>
     <table border="1px" cellpadding="5px" cellspacing="2px">
         <tr>
+            <th>部门</th>
             <th>职位</th>
             <th>要求</th>
             <th>待遇</th>
@@ -47,7 +48,8 @@
         </tr>
         <c:forEach items="${recruits}" var="recruit">
             <tr>
-                <td>${recruit.rc_position}</td>
+                <td>${recruit.department.d_name}</td>
+                <td>${recruit.position.p_name}</td>
                 <td>${recruit.rc_required}</td>
                 <td>${recruit.rc_minsalary}-${recruit.rc_maxsalary}</td>
                 <td>${recruit.rc_number}</td>

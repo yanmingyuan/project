@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ymy.dao.RecruitMapper">
-    <select id="queryAll" resultType="com.ymy.model.Recruit">
-        select * from T_RECRUIT
+    <update id="updateRecruit">
+        update T_RECRUIT set RC_NUMBER=#{rc_number}
+        where RC_ID=#{rc_id}
+    </update>
+    <select id="queryAll" resultMap="recuitMap">
+        select  r.RC_ID,r.RC_REQUIRED,r.RC_MINSALARY,r.RC_MAXSALARY,r.RC_NUMBER,
+        d.D_ID,d.D_NAME,p.P_ID,p.P_NAME
+        from T_RECRUIT r,T_DEPART d,T_POSITION p
+        where r.D_ID=d.D_ID AND r.P_ID=p.P_ID
+        and r.RC_NUMBER &gt;0
     </select>
+    <select id="queryRcById" resultMap="recuitMap">
+        select  r.RC_ID,r.RC_REQUIRED,r.RC_MINSALARY,r.RC_MAXSALARY,r.RC_NUMBER,
+        d.D_ID,d.D_NAME,p.P_ID,p.P_NAME
+        from T_RECRUIT r,T_DEPART d,T_POSITION p
+        where r.D_ID=d.D_ID AND r.P_ID=p.P_ID
+        and RC_ID=#{rc_id}
+    </select>
+    <resultMap id="recuitMap" type="com.ymy.model.Recruit">
+        <id property="rc_id" column="RC_ID"/>
+        <result property="rc_required" column="RC_REQUIRED"/>
+        <result property="rc_minsalary" column="RC_MINSALARY"/>
+        <result property="rc_maxsalary" column="RC_MAXSALARY"/>
+        <result property="rc_number" column="RC_NUMBER"/>
+        <association property="department" javaType="com.ymy.model.Department">
+            <id property="d_id" column="D_ID"/>
+            <result property="d_name" column="D_NAME"/>
+        </association>
+        <association property="position" javaType="com.ymy.model.Position">
+            <id property="p_id" column="P_ID"/>
+            <result property="p_name" column="P_NAME"/>
+        </association>
+    </resultMap>
     <insert id="addRecruit">
         insert into T_RECRUIT VALUES (S_RECRUIT.nextval,#{rc_required},
-        #{rc_position},#{rc_minsalary},#{rc_maxsalary},#{rc_number})
+        #{department.d_id},#{position.p_id},#{rc_minsalary},#{rc_maxsalary},#{rc_number})
     </insert>
     <delete id="deleteRecruit">
         DELETE FROM T_RECRUIT WHERE RC_ID=#{rc_id}

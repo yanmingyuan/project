@@ -18,7 +18,7 @@
 <body>
     <form action="login" method="post">
         账号：<input type="text" name="a_name"/><br/>
-        密码：<input type="text" name="a_pass"/>
+        密码：<input type="password" name="a_pass"/>
         <input type="submit" value="登录"/>
     </form>
 </body>

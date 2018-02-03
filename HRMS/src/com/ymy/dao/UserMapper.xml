@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ymy.dao.UserMapper">
-    <select id="queryUser" resultType="com.ymy.model.User">
-        select * from T_USER
-        <where>
-            U_NAME=#{u_name}
-            <if test="u_pass!=null and u_pass!=''">
-              AND U_PASS=#{u_pass}
-            </if>
-        </where>
-    </select>
-    <select id="queryObject" resultMap="userMap">
+    <select id="queryUser" resultMap="userMap">
         select  u.U_ID,u.U_NAME,u.U_PASS,u.U_STATE,
-        rc.RC_ID,rc.RC_REQUIRED,rc.RC_POSITION,rc.RC_MINSALARY,rc.RC_MAXSALARY,rc.RC_NUMBER
+        rc.RC_ID
         from T_USER u,T_RECRUIT rc
         <where>
-             u.rc_id=rc.rc_id
-             and U_NAME=#{u_name}
+            u.rc_id=rc.rc_id
+            and U_NAME=#{u_name}
             <if test="null!=u_pass and ''!=u_pass">
                 and U_PASS=#{u_pass}
             </if>
@@ -30,11 +21,6 @@
         <result property="u_state" column="u_state"/>
         <association property="recruit" javaType="com.ymy.model.Recruit">
             <id property="rc_id" column="rc_id"/>
-            <result property="rc_required" column="rc_required"/>
-            <result property="rc_position" column="rc_position"/>
-            <result property="rc_minsalary" column="rc_minsalary"/>
-            <result property="rc_maxsalary" column="rc_maxsalary"/>
-            <result property="rc_number" column="rc_number"/>
         </association>
     </resultMap>
     <insert id="addUser">

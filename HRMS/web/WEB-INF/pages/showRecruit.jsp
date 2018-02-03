@@ -19,6 +19,7 @@
 <body>
     <table border="1px" cellpadding="5px" cellspacing="2px">
         <tr>
+            <th>部门：</th>
             <th>职位：</th>
             <th>要求：</th>
             <th>待遇：</th>
@@ -27,7 +28,8 @@
         </tr>
         <c:forEach items="${recruits}" var="recruit">
             <tr>
-                <td>${recruit.rc_position}</td>
+                <td>${recruit.department.d_name}</td>
+                <td>${recruit.position.p_name}</td>
                 <td>${recruit.rc_required}</td>
                 <td>${recruit.rc_minsalary}-${recruit.rc_maxsalary}</td>
                 <td>${recruit.rc_number}</td>

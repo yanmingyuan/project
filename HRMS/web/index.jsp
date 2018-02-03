@@ -17,7 +17,7 @@
   </head>
   <body>
     <a href="toAdminPage">管理员通道</a><br/>
-    <a href="">员工通道</a><br/>
+    <a href="toLoginEmp">员工通道</a><br/>
     <a href="toVisitorPage">游客通道</a>
   </body>
 </html>

@@ -1,7 +1,9 @@
 package com.ymy.controller;
 
 import com.ymy.model.Department;
+import com.ymy.model.Employee;
 import com.ymy.service.DepartService;
+import com.ymy.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import java.util.List;
 public class DepartController {
     @Autowired
     private DepartService departService;
+    @Autowired
+    private EmployeeService employeeService;
     @RequestMapping(value = "/toShowDeparts")
     public String toShowDeparts(){
         return "showDeparts";
@@ -45,6 +49,12 @@ public class DepartController {
     }
     @RequestMapping(value = "/deleteDepart")
     public String deleteDepart(@RequestParam(value = "d_id")int d_id,HttpSession session){
+        List<Employee> employees=employeeService.queryByDept(d_id);
+        if(null!=employees){
+            if(employees.size()!=0){
+                return "fail";
+            }
+        }
         if(departService.deleteDepart(d_id)){
             List<Department> departs=departService.queryAllDepart();
             session.setAttribute("departs",departs);

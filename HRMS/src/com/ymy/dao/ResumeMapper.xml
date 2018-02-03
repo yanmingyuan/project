@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
     <mapper namespace="com.ymy.dao.ResumeMapper">
         <select id="queryAll" resultType="com.ymy.model.Resume">
-            select * from T_RESUME where R_STATE &lt;&gt; 1
+            select * from T_RESUME where R_STATE &lt;&gt; 1 and R_STATE &lt;&gt; 5
         </select>
 
         <select id="queryObject" parameterType="com.ymy.model.User" resultType="com.ymy.model.Resume">

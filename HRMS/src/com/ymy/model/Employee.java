@@ -16,7 +16,7 @@ public class Employee implements Serializable {
     private Department department;
     private Position position;
     private double e_salary;
-    private int e_state;//1、试用期(80%工资)，2、在职，3、离职
+    private int e_state=1;//1、试用期(80%工资)，2、在职，3、离职
 
     public Employee() {
     }

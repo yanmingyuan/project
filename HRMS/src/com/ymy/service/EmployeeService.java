@@ -1,11 +1,10 @@
-package com.ymy.dao;
+package com.ymy.service;
 
-import com.ymy.model.Department;
 import com.ymy.model.Employee;
 
 import java.util.List;
 
-public interface EmployeeMapper {
+public interface EmployeeService {
     List<Employee> queryAll();
     Employee queryEmp(Employee employee);
     List<Employee> queryByDept(int d_id);

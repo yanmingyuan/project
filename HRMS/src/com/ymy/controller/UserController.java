@@ -61,8 +61,8 @@ public class UserController {
     @RequestMapping(value = "/queryObject")
     public String queryObject(HttpSession session){
         User user= (User) session.getAttribute("user");
-        User user1=userService.queryObject(user);
-        session.setAttribute("user",user1);
-        return "success";
+        Recruit recruit=recruitService.queryRcById(user.getRecruit().getRc_id());
+        session.setAttribute("recruit",recruit);
+        return "showRecruitToUser";
     }
 }
