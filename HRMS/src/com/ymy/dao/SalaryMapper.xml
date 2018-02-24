@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ymy.dao.SalaryMapper">
+    <insert id="addSalary">
+        insert into T_SALARY VALUES (
+        S_SALARY.nextval,#{s_basic},#{s_performance},#{s_overtime},#{s_reward},
+        #{s_security},#{s_time},#{employee.e_id}
+        )
+    </insert>
+    <select id="queryByEmp" resultType="com.ymy.model.Salary">
+        select S_ID,S_BASIC,S_PERFORMANCE,S_OVERTIME,S_REWARD,S_SECURITY
+        from T_SALARY
+        where S_TIME like concat(#{s_time},'%')
+        and E_ID=#{employee.e_id}
+    </select>
+</mapper>

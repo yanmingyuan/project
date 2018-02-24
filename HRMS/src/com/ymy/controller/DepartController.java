@@ -24,6 +24,7 @@ public class DepartController {
     public String toShowDeparts(){
         return "showDeparts";
     }
+    /*调到所有部门显示页面*/
     @RequestMapping(value = "/showDeparts")
     public String showDeparts(HttpSession session){
         List<Department> departs=departService.queryAllDepart();

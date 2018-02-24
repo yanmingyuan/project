@@ -51,7 +51,7 @@
                 <td>${recruit.department.d_name}</td>
                 <td>${recruit.position.p_name}</td>
                 <td>${recruit.rc_required}</td>
-                <td>${recruit.rc_minsalary}-${recruit.rc_maxsalary}</td>
+                <td>${recruit.rc_minsalary}--${recruit.rc_maxsalary}</td>
                 <td>${recruit.rc_number}</td>
                 <td>
                     <c:if test="${resume.r_state==1}">

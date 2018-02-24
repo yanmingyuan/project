@@ -19,6 +19,7 @@
     <a href="toAddRecruit">添加招聘信息</a><br/>
     <a href="queryAllRecruits">查看所有招聘信息</a><br/>
     <a href="scanResumes">浏览所有应聘信息</a><br/>
-    <a href="showDeparts">查看部门</a>
+    <a href="showDeparts">查看部门</a><br/>
+    <a href="queryAllTrains">查看培训信息</a>
 </body>
 </html>

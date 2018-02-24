@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ymy.dao.Trainmapper">
+    <insert id="addTrain">
+        insert into T_TRAIN VALUES (
+        S_TRAIN.nextval,#{tn_title},#{tn_time},#{tn_place},#{tn_content},#{department.d_id}
+        )
+    </insert>
+    <update id="updateTrain">
+        update T_TRAIN where D_ID=#{department.d_id}
+    </update>
+    <delete id="deleteTrain">
+        delete from T_TRAIN WHERE TN_ID=#{tn_id}
+    </delete>
+
+    <select id="queryAllTrains" resultMap="trainMapper">
+        select t.TN_ID,t.TN_TITLE,t.TN_TIME,t.TN_PLACE,t.TN_CONTENT,
+        d.D_ID,d.D_NAME
+        from T_TRAIN t,T_DEPART d
+        where t.D_ID=d.D_ID
+    </select>
+    <select id="queryByDepart" resultType="com.ymy.model.Train">
+        select * from T_TRAIN
+        where D_ID=#{d_id}
+    </select>
+    <select id="queryById" resultType="com.ymy.model.Train">
+        select * from T_TRAIN
+        where TN_ID=#{tn_id}
+    </select>
+    <resultMap id="trainMapper" type="com.ymy.model.Train">
+        <id property="tn_id" column="TN_ID"/>
+        <result property="tn_title" column="TN_TITLE"/>
+        <result property="tn_time" column="TN_TIME"/>
+        <result property="tn_place" column="TN_PLACE"/>
+        <result property="tn_content" column="TN_CONTENT"/>
+        <association property="department" javaType="com.ymy.model.Department">
+            <id property="d_id" column="D_ID"/>
+            <result property="d_name" column="D_NAME"/>
+        </association>
+    </resultMap>
+</mapper>

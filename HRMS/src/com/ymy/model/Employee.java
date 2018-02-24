@@ -13,15 +13,15 @@ public class Employee implements Serializable {
     private String e_livingPlace;
     private String e_address;
     private String e_entryTime;
+    private double e_salary;
+    private int e_state=1;//1、试用期(80%工资)，2、在职，3、离职(不给结算工资)
     private Department department;
     private Position position;
-    private double e_salary;
-    private int e_state=1;//1、试用期(80%工资)，2、在职，3、离职
 
     public Employee() {
     }
 
-    public Employee(int e_id, String e_name, String e_pass, String e_sex, String e_birth, String e_email, String e_phone, String e_livingPlace, String e_address, String e_entryTime, Department department, Position position, double e_salary, int e_state) {
+    public Employee(int e_id, String e_name, String e_pass, String e_sex, String e_birth, String e_email, String e_phone, String e_livingPlace, String e_address, String e_entryTime, double e_salary, int e_state, Department department, Position position) {
         this.e_id = e_id;
         this.e_name = e_name;
         this.e_pass = e_pass;
@@ -32,10 +32,10 @@ public class Employee implements Serializable {
         this.e_livingPlace = e_livingPlace;
         this.e_address = e_address;
         this.e_entryTime = e_entryTime;
-        this.department = department;
-        this.position = position;
         this.e_salary = e_salary;
         this.e_state = e_state;
+        this.department = department;
+        this.position = position;
     }
 
     public int getE_id() {
@@ -163,10 +163,10 @@ public class Employee implements Serializable {
                 ", e_livingPlace='" + e_livingPlace + '\'' +
                 ", e_address='" + e_address + '\'' +
                 ", e_entryTime='" + e_entryTime + '\'' +
-                ", department=" + department +
-                ", position=" + position +
                 ", e_salary=" + e_salary +
                 ", e_state=" + e_state +
+                ", department=" + department +
+                ", position=" + position +
                 '}';
     }
 }

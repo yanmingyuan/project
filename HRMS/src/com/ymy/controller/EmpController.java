@@ -1,12 +1,7 @@
 package com.ymy.controller;
 
-import com.ymy.model.Employee;
-import com.ymy.model.Recruit;
-import com.ymy.model.Resume;
-import com.ymy.model.User;
-import com.ymy.service.EmployeeService;
-import com.ymy.service.RecruitService;
-import com.ymy.service.ResumeService;
+import com.ymy.model.*;
+import com.ymy.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +20,15 @@ public class EmpController {
     private ResumeService resumeService;
     @Autowired
     private RecruitService recruitService;
+    @Autowired
+    private TrainService trainService;
+    @Autowired
+    private AttendService attendService;
+    /*游客确认成为正式游客*/
     @RequestMapping(value = "/confirm")
     public String confirm(HttpSession session){
         Date date=new Date();
-        SimpleDateFormat dateFormat=new SimpleDateFormat("yy-MM-dd hh:mm:ss");
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String entryTime=dateFormat.format(date);
         User user = (User) session.getAttribute("user");
         Resume resume=resumeService.queryObject(user);
@@ -66,8 +66,18 @@ public class EmpController {
     @RequestMapping(value = "/loginEmp")
     public String loginEmp(Employee employee,HttpSession session){
         Employee employee1=employeeService.queryEmp(employee);
-        System.out.println(employee1);
         session.setAttribute("employee",employee1);
+        int d_id=employee1.getDepartment().getD_id();
+        Train train=trainService.queryByDepart(d_id);
+        session.setAttribute("train",train);
+        Date date=new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        String day=dateFormat.format(date);
+        Attend attend=new Attend();
+        attend.setAt_arriveTime(day);
+        attend.setEmployee(employee1);
+        Attend attend1=attendService.queryByDateAndEmp(attend);
+        session.setAttribute("attend",attend1);
         return "empPage";
     }
 }

@@ -49,6 +49,9 @@ public class AdminController {
         }
         return "fail";
     }
+    /*
+    * 邀请面试
+    * */
     @RequestMapping(value = "/invite")
     public String invite(@RequestParam(value = "r_id")int r_id, HttpSession session){
         Resume resume=resumeService.queryById(r_id);

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ymy.dao.RewardMapper">
+    <insert id="addReward">
+        insert into T_REWARD VALUES (
+        S_REWARD.nextval,#{rw_time},#{rw_cause},#{rw_money},#{employee.e_id}
+        )
+    </insert>
+    <update id="updateReward">
+        update T_REWARD
+        <set>
+            <if test="rw_time!=null">
+                RW_TIME=#{rw_time},
+            </if>
+            <if test="rw_cause!=null">
+                RW_CAUSE=#{rw_cause},
+            </if>
+            RW_MONEY=#{rw_money},
+            RW_STATE=#{rw_state}
+        </set>
+        where RW_ID=#{rw_id}
+    </update>
+    <delete id="deleteReward">
+        delete from T_REWARD where RW_ID=#{rw_id}
+    </delete>
+
+    <select id="queryAllByMonth" resultType="com.ymy.model.Reward">
+        select RW_ID,RW_TIME,RW_CAUSE,RW_MONEY,RW_STATE
+        from T_REWARD
+        where E_ID=#{employee.e_id}
+        and RW_TIME like concat(#{rw_time},'%')
+    </select>
+    <select id="queryByDSAndEmp" resultType="com.ymy.model.Reward">
+        select RW_ID,RW_TIME,RW_CAUSE,RW_MONEY,RW_STATE
+        from T_REWARD
+        where E_ID=#{employee.e_id}
+        and RW_TIME like concat(#{rw_time},'%')
+        AND RW_STATE between 1 and 2
+    </select>
+</mapper>

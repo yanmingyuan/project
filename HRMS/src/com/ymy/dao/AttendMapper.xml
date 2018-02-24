@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ymy.dao.AttendMapper">
+    <select id="queryByDateAndEmp" resultType="com.ymy.model.Attend">
+        select AT_ID,AT_ARRIVETIME,AT_LEAVETIME
+        from T_ATTEND
+        <where>
+            <if test="null!=at_arriveTime">
+                AT_ARRIVETIME like concat(#{at_arriveTime},'%')
+            </if>
+            <if test="null!=employee">
+                and E_ID=#{employee.e_id}
+            </if>
+        </where>
+    </select>
+    <select id="queryByMonthAndEmp" resultType="com.ymy.model.Attend">
+        select AT_ID,AT_ARRIVETIME,AT_LEAVETIME
+        from T_ATTEND
+        <where>
+            <if test="null!=at_arriveTime">
+                AT_ARRIVETIME like concat(#{at_arriveTime},'%')
+            </if>
+            <if test="null!=employee">
+                and E_ID=#{employee.e_id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addAttend">
+        insert into T_ATTEND VALUES (
+        S_ATTEND.nextval,#{at_arriveTime},null,#{employee.e_id}
+        )
+    </insert>
+
+    <update id="updateAttend">
+        update T_ATTEND set AT_LEAVETIME=#{at_leaveTime}
+        where AT_ID=#{at_id}
+    </update>
+</mapper>
