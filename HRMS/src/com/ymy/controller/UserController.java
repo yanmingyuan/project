@@ -9,6 +9,7 @@ import com.ymy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,6 +35,14 @@ public class UserController {
     @RequestMapping(value = "/toRegisterVisitor")
     public String toRegisterVisitor(){
         return "registerVisitor";
+    }
+    @RequestMapping(value = "/checkUname")
+    public @ResponseBody String checkUname(User user){
+        User user1=userService.queryUser(user);
+        if(user1!=null){
+            return "<font color='red'>用户名不可用</font>";
+        }
+        return "<font color='green'>用户名可用</font>";
     }
     @RequestMapping(value = "/visitorRegister")
     public String visitorRegister(User user){

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +31,14 @@ public class AdminController {
     @RequestMapping("/toLogin")
     public String toLogin(){
         return "login";
+    }
+    @RequestMapping("/checkAname")
+    public @ResponseBody String checkAname(Admin admin){
+        Admin admin1=adminService.queryObject(admin);
+        if(admin1!=null){
+            return "<font color='red'>用户名不可用</font>";
+        }
+        return "<font color='green'>用户名可用</font>";
     }
     @RequestMapping("/register")
     public String regisiter(Admin admin){
