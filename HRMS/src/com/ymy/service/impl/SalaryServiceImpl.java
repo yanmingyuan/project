@@ -6,13 +6,15 @@ import com.ymy.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SalaryServiceImpl implements SalaryService{
     @Autowired
     private SalaryMapper salaryMapper;
     @Override
-    public Salary queryByEmp(Salary salary) {
-        return salaryMapper.queryByEmp(salary);
+    public List<Salary> queryByEmp(int e_id) {
+        return salaryMapper.queryByEmp(e_id);
     }
 
     @Override

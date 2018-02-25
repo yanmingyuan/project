@@ -5,6 +5,7 @@ import com.ymy.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.xml.crypto.Data;
@@ -24,6 +25,10 @@ public class EmpController {
     private TrainService trainService;
     @Autowired
     private AttendService attendService;
+    @Autowired
+    private DepartService departService;
+    @Autowired
+    private SalaryService salaryService;
     /*游客确认成为正式游客*/
     @RequestMapping(value = "/confirm")
     public String confirm(HttpSession session){
@@ -68,8 +73,8 @@ public class EmpController {
         Employee employee1=employeeService.queryEmp(employee);
         session.setAttribute("employee",employee1);
         int d_id=employee1.getDepartment().getD_id();
-        Train train=trainService.queryByDepart(d_id);
-        session.setAttribute("train",train);
+        List<Train> trains=trainService.queryByDepart(d_id);
+        session.setAttribute("trains",trains);
         Date date=new Date();
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         String day=dateFormat.format(date);
@@ -78,6 +83,40 @@ public class EmpController {
         attend.setEmployee(employee1);
         Attend attend1=attendService.queryByDateAndEmp(attend);
         session.setAttribute("attend",attend1);
+        List<Salary> salaries=salaryService.queryByEmp(employee1.getE_id());
+        session.setAttribute("salaries",salaries);
         return "empPage";
+    }
+    @RequestMapping("/queryAllEmp")
+    public String queryAllEmp(HttpSession session){
+        List<Employee> emps=employeeService.queryAll();
+        session.setAttribute("emps",emps);
+        return "showEmps";
+    }
+    @RequestMapping(value = "/toChangeWork")
+    public String toChangeWork(@RequestParam(value = "e_id")int e_id,HttpSession session){
+        List<Department> departs=departService.queryAllDepart();
+        session.setAttribute("departs",departs);
+        Employee employee=employeeService.queryById(e_id);
+        session.setAttribute("employee",employee);
+        return "changeWorkPage";
+    }
+    @RequestMapping(value = "/changeWork")
+    public String changeWork(@RequestParam(value = "d_id")int d_id,
+                             @RequestParam(value = "p_id")int p_id,
+                             @RequestParam(value = "e_salary")double e_salary,
+                             HttpSession session){
+        Employee employee= (Employee) session.getAttribute("employee");
+        Department department=new Department();
+        department.setD_id(d_id);
+        Position position=new Position();
+        position.setP_id(p_id);
+        employee.setE_salary(e_salary);
+        employee.setDepartment(department);
+        employee.setPosition(position);
+        if(employeeService.updateEmployee(employee)){
+            return "showEmps";
+        }
+        return "fail";
     }
 }

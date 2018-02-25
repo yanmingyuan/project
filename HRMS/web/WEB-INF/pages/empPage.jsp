@@ -33,6 +33,12 @@
             $("#inp5").click(function () {
                 $("#d3").hide();
             })
+            $("#inp6").click(function () {
+                $("#d4").hide();
+            })
+            $("#inp7").click(function () {
+                $("#d4").show();
+            })
         })
     </script>
 </head>
@@ -53,7 +59,22 @@
 </div><br/>
 <input id=inp3 type="button" value="查看培训信息"/>
     <div id="d2" style="display: none">
-        <c:if test="${train==null}">无</c:if>
+        <table border="1px" cellpadding="3px" cellspacing="3px">
+            <tr>
+                <th>标题</th>
+                <th>时间</th>
+                <th>地点</th>
+                <th>内容</th>
+            </tr>
+            <c:forEach items="${trains}" var="train">
+                <tr>
+                    <td>${train.tn_title}</td>
+                    <td>${train.tn_time}</td>
+                    <td>${train.tn_place}</td>
+                    <td>${train.tn_content}</td>
+                </tr>
+            </c:forEach>
+        </table>
         <input id=inp4 type="button" value="隐藏培训信息"/>
         <p>${train}</p>
     </div>
@@ -76,6 +97,24 @@
             </c:forEach>
         </table>
         <input id=inp5 type="button" value="隐藏"/>
+    </c:if>
+</div><br/>
+<input id=inp7 type="button" value="查看自己的工资列表"/>
+<div id="d4" style="display: none">
+    <c:if test="${salaries!=null&&salaries.size()!=0}">
+        <table border="1px" cellpadding="3px" cellspacing="3px">
+            <tr>
+                <th>年月</th>
+                <th>薪资</th>
+            </tr>
+            <c:forEach items="${salaries}" var="salary">
+                <tr>
+                    <td>${salary.s_time}</td>
+                    <td>${salary.s_basic+salary.s_reward+salary.s_security}</td>
+                </tr>
+            </c:forEach>
+        </table>
+        <input id=inp6 type="button" value="隐藏"/>
     </c:if>
 </div>
 </body>

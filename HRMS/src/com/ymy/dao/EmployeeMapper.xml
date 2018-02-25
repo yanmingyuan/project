@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ymy.dao.EmployeeMapper">
-    <select id="queryAll" resultType="com.ymy.model.Employee">
-        select * from T_EMP
+    <select id="queryAll" resultMap="empMapper">
+        select e.E_ID,e.E_NAME,e.E_PASS,e.E_SEX,e.E_BIRTH,e.E_EMAIL,
+        e.E_PHONE,e.E_LIVINGPLACE,e.E_ADDRESS,e.E_ENTRYTIME,e.E_SALARY,e.E_STATE,
+        d.D_ID,d.D_NAME,d.D_CREATETIME,
+        p.P_ID,p.P_NAME,p.P_CREATETIME
+        from T_EMP e,T_DEPART d,T_POSITION p
+        WHERE e.D_ID=d.D_ID and e.P_ID=p.P_ID
     </select>
     <select id="queryEmp" resultMap="empMapper">
         select e.E_ID,e.E_NAME,e.E_PASS,e.E_SEX,e.E_BIRTH,e.E_EMAIL,
@@ -29,6 +34,15 @@
     </select>
     <select id="queryByPs" resultType="com.ymy.model.Employee">
         select * from T_EMP WHERE P_ID=#{p_id}
+    </select>
+    <select id="queryById" resultMap="empMapper">
+        select e.E_ID,e.E_NAME,e.E_PASS,e.E_SEX,e.E_BIRTH,e.E_EMAIL,
+        e.E_PHONE,e.E_LIVINGPLACE,e.E_ADDRESS,e.E_ENTRYTIME,e.E_SALARY,e.E_STATE,
+        d.D_ID,d.D_NAME,d.D_CREATETIME,
+        p.P_ID,p.P_NAME,p.P_CREATETIME
+        from T_EMP e,T_DEPART d,T_POSITION p
+        where e.D_ID=d.D_ID and e.P_ID=p.P_ID
+        and e.E_ID=#{e_id}
     </select>
     <resultMap id="empMapper" type="com.ymy.model.Employee">
         <id property="e_id" column="E_ID"/>
@@ -83,7 +97,7 @@
             <if test="null!=department and ''!=department">
                 D_ID=#{department.d_id},
             </if>
-            <if test="null!=positon and ''!=position">
+            <if test="null!=position and ''!=position">
                 P_ID=#{position.p_id},
             </if>
             <if test="0!=e_salary">

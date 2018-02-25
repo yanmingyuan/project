@@ -5,9 +5,7 @@ import java.io.Serializable;
 public class Salary implements Serializable{
     private int s_id;
     private double s_basic;//基本工资
-    private double s_performance;//绩效奖金
-    private double s_overtime;//加班
-    private double s_reward;//奖金
+    private double s_reward;//奖金，绩效奖金，加班
     private double s_security;//社保，基本工资的8%
     private String s_time;//哪个月份的工资
     private Employee employee;
@@ -15,11 +13,9 @@ public class Salary implements Serializable{
     public Salary() {
     }
 
-    public Salary(int s_id, double s_basic, double s_performance, double s_overtime, double s_reward, double s_security, String s_time, Employee employee) {
+    public Salary(int s_id, double s_basic, double s_reward, double s_security, String s_time, Employee employee) {
         this.s_id = s_id;
         this.s_basic = s_basic;
-        this.s_performance = s_performance;
-        this.s_overtime = s_overtime;
         this.s_reward = s_reward;
         this.s_security = s_security;
         this.s_time = s_time;
@@ -40,22 +36,6 @@ public class Salary implements Serializable{
 
     public void setS_basic(double s_basic) {
         this.s_basic = s_basic;
-    }
-
-    public double getS_performance() {
-        return s_performance;
-    }
-
-    public void setS_performance(double s_performance) {
-        this.s_performance = s_performance;
-    }
-
-    public double getS_overtime() {
-        return s_overtime;
-    }
-
-    public void setS_overtime(double s_overtime) {
-        this.s_overtime = s_overtime;
     }
 
     public double getS_reward() {
@@ -95,8 +75,6 @@ public class Salary implements Serializable{
         return "Salary{" +
                 "s_id=" + s_id +
                 ", s_basic=" + s_basic +
-                ", s_performance=" + s_performance +
-                ", s_overtime=" + s_overtime +
                 ", s_reward=" + s_reward +
                 ", s_security=" + s_security +
                 ", s_time='" + s_time + '\'' +

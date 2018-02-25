@@ -3,14 +3,13 @@
 <mapper namespace="com.ymy.dao.SalaryMapper">
     <insert id="addSalary">
         insert into T_SALARY VALUES (
-        S_SALARY.nextval,#{s_basic},#{s_performance},#{s_overtime},#{s_reward},
+        S_SALARY.nextval,#{s_basic},#{s_reward},
         #{s_security},#{s_time},#{employee.e_id}
         )
     </insert>
     <select id="queryByEmp" resultType="com.ymy.model.Salary">
-        select S_ID,S_BASIC,S_PERFORMANCE,S_OVERTIME,S_REWARD,S_SECURITY
+        select S_ID,S_BASIC,S_REWARD,S_SECURITY,S_TIME
         from T_SALARY
-        where S_TIME like concat(#{s_time},'%')
-        and E_ID=#{employee.e_id}
+        where E_ID=#{e_id}
     </select>
 </mapper>

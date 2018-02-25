@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface EmployeeMapper {
     List<Employee> queryAll();//查询所有员工
+    Employee queryById(int e_id);//根据id查询员工
     Employee queryEmp(Employee employee);//登录返回员工个人信息
     List<Employee> queryByDept(int d_id);//根据部门查询员工
     List<Employee> queryByPs(int p_id);

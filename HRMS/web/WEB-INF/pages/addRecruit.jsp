@@ -20,7 +20,6 @@
         $(function () {
             $("#depart").change(function () {
                 var d_id=$(this).val()
-                alert(d_id)
                 $.ajax({
                     url:"queryPositions",
                     data:{"d_id":d_id},
@@ -28,7 +27,6 @@
                     success:function (positions) {
                         $("#position").empty()
                         var p=eval(positions)
-                        alert(JSON.stringify(p))
                         var str="";
                         $.each(positions,function (index,value) {
                             str+="<option value="+value.p_id+">"+value.p_name+"</option>"

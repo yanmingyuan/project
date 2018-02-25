@@ -16,7 +16,6 @@
                 RW_CAUSE=#{rw_cause},
             </if>
             RW_MONEY=#{rw_money},
-            RW_STATE=#{rw_state}
         </set>
         where RW_ID=#{rw_id}
     </update>
@@ -25,7 +24,7 @@
     </delete>
 
     <select id="queryAllByMonth" resultType="com.ymy.model.Reward">
-        select RW_ID,RW_TIME,RW_CAUSE,RW_MONEY,RW_STATE
+        select RW_ID,RW_TIME,RW_CAUSE,RW_MONEY
         from T_REWARD
         where E_ID=#{employee.e_id}
         and RW_TIME like concat(#{rw_time},'%')
@@ -35,6 +34,5 @@
         from T_REWARD
         where E_ID=#{employee.e_id}
         and RW_TIME like concat(#{rw_time},'%')
-        AND RW_STATE between 1 and 2
     </select>
 </mapper>

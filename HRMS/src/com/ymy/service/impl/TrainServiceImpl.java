@@ -17,7 +17,7 @@ public class TrainServiceImpl implements TrainService{
     }
 
     @Override
-    public Train queryByDepart(int d_id) {
+    public List<Train> queryByDepart(int d_id) {
         return trainmapper.queryByDepart(d_id);
     }
 
